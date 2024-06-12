@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 5000;
 
 dotenv.config(); // init default dotenv
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 app.use("/api/auth", authRoutes);
 
 // app.get("/", (req, res) => {
