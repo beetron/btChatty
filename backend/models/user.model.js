@@ -19,6 +19,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  friendRequest: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    default: [],
+  },
+  friendList: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    default: [],
+  },
 });
 
 const user = mongoose.model("User", userSchema);
