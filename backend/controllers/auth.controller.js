@@ -5,7 +5,7 @@ import generateTokenAndSetCookie from "../utility/generateToken.js";
 // SIGNUP
 export const signup = async (req, res) => {
   try {
-    const { fullName, username, password, confirmPassword } = req.body;
+    const { username, password, confirmPassword } = req.body;
 
     // Check if user chosen passwords match
     if (password != confirmPassword) {
@@ -30,20 +30,18 @@ export const signup = async (req, res) => {
     //   "https://avatar.iran.liara.run/public/girl?username=${username}";
 
     const newUser = new User({
-      fullName: fullName,
       username: username,
       password: hashedPassword,
       profilePhoto: maleProfilePic,
     });
 
     if (newUser) {
-      // generate JWT token
+      // Generate JWT token
       generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
 
       res.status(201).json({
         _id: newUser._id,
-        fullName: newUser.fullname,
         username: newUser.username,
         profilePhoto: newUser.profilePhoto,
       });
@@ -58,28 +56,26 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log(req.body);
 
-    // search for username
+    // Search for username
     const user = await User.findOne({ username });
 
-    // check passwored integrity
+    // Check passwored integrity
     const isPasswordCorrect = await bcrypt.compare(
       password,
       user?.password || ""
     );
 
-    // check credentials
+    // Check credentials
     if (!user || !isPasswordCorrect) {
       return res.status(400).json({ error: "Invalid login information" });
     }
 
-    // generate token
+    // Generate token
     generateTokenAndSetCookie(user._id, res);
 
     res.status(200).json({
       _id: user._id,
-      fullName: user.fullName,
       username: user.username,
       profilePhoto: user.profilePhoto,
     });
