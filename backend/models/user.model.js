@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
     },
     uniqueId: {
       type: String,
+      maxLength: 12,
     },
     password: {
       type: String,
@@ -26,7 +27,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    friendRequest: [
+    friendRequests: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
