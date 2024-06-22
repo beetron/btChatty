@@ -7,12 +7,12 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
-    // find conversation based on senderid, receiverid
+    // Find conversation based on senderid, receiverid
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     });
 
-    // create coversation if none exist
+    // Create coversation if none exist
     if (!conversation) {
       conversation = await Conversation.create({
         participants: [senderId, receiverId],
@@ -29,7 +29,7 @@ export const sendMessage = async (req, res) => {
       conversation.messages.push(newMessage._id);
     }
 
-    // save database
+    // Save database
     await Promise.all([conversation.save(), newMessage.save()]);
 
     res.status(201).json(newMessage);
