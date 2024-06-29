@@ -1,7 +1,7 @@
 import React from "react";
 import Message from "./Message";
 
-const Messages = () => {
+const Friends = () => {
   return (
     <div className="py-2 flex flex-col overflow-auto">
       <Message />
@@ -14,7 +14,7 @@ const Messages = () => {
   );
 };
 
-export default Messages;
+export default Friends;
 
 // const Messages = () => {
 //   return (
