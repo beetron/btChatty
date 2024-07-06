@@ -1,8 +1,10 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
+  const { authUser, setAuthUser } = useAuthContext();
 
   const signup = async ({ username, password, confirmPassword }) => {
     const isDataValid = validateData({ username, password, confirmPassword });
@@ -20,7 +22,15 @@ const useSignup = () => {
       });
 
       const data = await res.json();
-      console.log(data);
+
+      // Check data for errors
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // Store user to local storage
+      localStorage.setItem("btchatty-user", JSON.stringify(data));
+      setAuthUser(data);
     } catch (error) {
       toast.error(error.message);
     } finally {
