@@ -4,18 +4,19 @@ import User from "../models/user.model.js";
 export const getFriendList = async (req, res) => {
   try {
     const user = req.user;
-
     // Get friend list
-    const friendList = await User.find({
-      _id: { $in: user.friendList },
-    });
+    const friendList = user.friendList;
 
     // Return empty array if friendList is empty
     if (!friendList) {
       return res.status(200).json([]);
     }
 
-    res.status(200).json(friendList);
+    // Get user data based off of objectIdFriendList
+    const friendListData = await User.find({
+      _id: { $in: friendList },
+    }).select("-password");
+    res.status(200).json(friendListData);
   } catch (error) {
     console.log("Error in getFriendList controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });

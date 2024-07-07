@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
-  const { authUser, setAuthUser } = useAuthContext();
+  const { setAuthUser } = useAuthContext();
 
   const login = async ({ username, password }) => {
     setLoading(true);
@@ -23,7 +23,6 @@ const useLogin = () => {
       });
 
       const data = await res.json();
-      console.log(data);
 
       // Check data for errors
       if (data.error) {
@@ -36,7 +35,7 @@ const useLogin = () => {
       localStorage.setItem("btchatty-user", JSON.stringify(data));
       setAuthUser(data);
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     } finally {
       setLoading(false);
     }
@@ -46,6 +45,7 @@ const useLogin = () => {
 
 export default useLogin;
 
+// Check if both username and password are provided
 function validateData({ username, password }) {
   if (!username || !password) {
     toast.error("Missing username or password");
