@@ -78,3 +78,17 @@ export const addFriendRequest = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// Accept friend request
+export const acceptFriendRequest = async (req, res) => {
+  const user = req.user;
+
+  // Retrieve uniqueId from request params
+  const { uniqueId } = req.params;
+
+  const requestSender = await User.findOne({ uniqueId }).select("-password");
+
+  if (!requestSender) {
+    return res.status(400).json({ error: "User not found" });
+  }
+};
