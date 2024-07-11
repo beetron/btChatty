@@ -1,3 +1,4 @@
+import { request } from "express";
 import User from "../models/user.model.js";
 
 // Get user friend list
@@ -89,14 +90,49 @@ export const addFriendRequest = async (req, res) => {
 
 // Accept friend request
 export const acceptFriendRequest = async (req, res) => {
+  // Get user data
   const user = req.user;
 
   // Retrieve uniqueId from request params
   const { uniqueId } = req.params;
 
-  const requestSender = await User.findOne({ uniqueId }).select("-password");
+  try {
+    // Find user sending the friend request
+    const requestSender = await User.findOne({ uniqueId }).select(
+      "_id friendList"
+    );
 
-  if (!requestSender) {
-    return res.status(400).json({ error: "User not found" });
+    // Check if requester exists
+    if (!requestSender) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    // Check if requester is already a friend
+    if (user.friendList.includes(requestSender._id)) {
+      return res.status(400).json({ error: "Already friends" });
+    }
+
+    // Update user's friend list
+    user.friendList.push(requestSender._id);
+
+    // Remove requestSender from user's friendRequests
+    user.friendRequests.pull(requestSender._id);
+
+    console.log("User: ", user);
+
+    // Save user database
+    user.save();
+
+    // Update and save requestSender's friend list
+    requestSender.friendList.push(user._id);
+    requestSender.save();
+
+    return res.status(200).json({ message: "Friend request accepted" });
+  } catch (error) {
+    console.log("Error in acceptFriendRequest controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
+
+// Remove friend
+export const removeFriend = async (req, res) => {};
