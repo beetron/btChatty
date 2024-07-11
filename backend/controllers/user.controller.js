@@ -135,4 +135,44 @@ export const acceptFriendRequest = async (req, res) => {
 };
 
 // Remove friend
-export const removeFriend = async (req, res) => {};
+export const removeFriend = async (req, res) => {
+  // Get user data
+  const user = req.user;
+
+  // Retrieve uniqueId from request params
+  const { uniqueId } = req.params;
+
+  try {
+    // Find user to remove
+    const friendToRemove = await User.findOne({ uniqueId }).select(
+      "_id friendList"
+    );
+
+    // Check if friend exists
+    if (!friendToRemove) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    // Check if friend is not in friend list
+    if (!user.friendList.includes(friendToRemove._id)) {
+      return res.status(400).json({ error: "User not in friend list" });
+    }
+
+    // Update user's friend list
+    user.friendList.pull(friendToRemove._id);
+
+    // Update friendToRemove's friend list
+    friendToRemove.friendList.pull(user._id);
+
+    // Save user database
+    user.save();
+
+    // Save friendToRemove database
+    friendToRemove.save();
+
+    return res.status(200).json({ message: "Friend removed" });
+  } catch (error) {
+    console.log("Error in removeFriend controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
