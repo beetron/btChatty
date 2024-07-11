@@ -33,7 +33,13 @@ export const getFriendRequests = async (req, res) => {
 
     // Get friend requests
     const friendRequests = user.friendRequests;
-    res.status(200).json(friendRequests);
+
+    // Get user data based off of objectId friendRequests
+    const friendRequestsIds = await User.find({
+      _id: { $in: friendRequests },
+    }).select("_id nickname profilePhoto");
+
+    res.status(200).json(friendRequestsIds);
   } catch (error) {
     console.log("Error in getFriendRequests controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
@@ -49,7 +55,9 @@ export const addFriendRequest = async (req, res) => {
     const { uniqueId } = req.params;
 
     // Find user being friend requested
-    const requestReceiver = await User.findOne({ uniqueId });
+    const requestReceiver = await User.findOne({ uniqueId }).select(
+      "-password"
+    );
 
     // Check if the uniqueId to add exists
     if (!requestReceiver) {
@@ -57,7 +65,7 @@ export const addFriendRequest = async (req, res) => {
       return res.status(400).json({ error: "User not found" });
     }
 
-    // Check if user it not adding itself
+    // Check if user is not adding itself
     if (requestReceiver._id.equals(user._id)) {
       console.log({ error: "Cannot add yourself" });
       return res.status(400).json({ error: "Cannot add yourself" });
