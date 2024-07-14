@@ -1,15 +1,13 @@
 import React from "react";
-import Message from "./Message";
+import Friend from "./Friend";
 
 const Friends = () => {
   return (
     <div className="py-2 flex flex-col overflow-auto">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
+      <Friend />
+      <Friend />
+      <Friend />
+      <Friend />
     </div>
   );
 };
