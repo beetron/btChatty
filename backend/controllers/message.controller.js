@@ -41,12 +41,12 @@ export const sendMessage = async (req, res) => {
 
 export const getMessages = async (req, res) => {
   try {
-    const { id: receiverId } = req.params;
-    const senderId = req.user._id;
+    const { id: friendId } = req.params;
+    const userId = req.user._id;
 
-    // Find conversation based on senderid, receiverid
-    let conversation = await Conversation.findOne({
-      participants: { $all: [senderId, receiverId] },
+    // Find conversation based on userId, friendId
+    const conversation = await Conversation.findOne({
+      participants: { $all: [userId, friendId] },
     }).populate("messages");
 
     // Check if conversation exists
@@ -54,9 +54,9 @@ export const getMessages = async (req, res) => {
       return res.status(200).json([]);
     }
 
-    // Const messages = conversation.messages;
+    const messages = conversation.messages;
 
-    res.status(200).json(conversation.messages);
+    res.status(200).json(messages);
   } catch (error) {
     console.log("Error in getMessages controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
