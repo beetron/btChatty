@@ -26,8 +26,6 @@ const useLogin = () => {
 
       const data = await res.json();
 
-      console.log(data);
-
       // Check data for errors
       if (data.error) {
         setError(data.error);
