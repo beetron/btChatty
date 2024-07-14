@@ -4,12 +4,10 @@ import toast from "react-hot-toast";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { setAuthUser } = useAuthContext();
 
   const login = async ({ username, password }) => {
     setLoading(true);
-    setError(null);
 
     const isDataValid = validateData({ username, password });
     if (!isDataValid) {
@@ -28,22 +26,19 @@ const useLogin = () => {
 
       // Check data for errors
       if (data.error) {
-        setError(data.error);
-        toast.error(data.error);
-        return;
+        throw new Error(data.error);
       }
 
       // Store user to local storage
       localStorage.setItem("btchatty-user", JSON.stringify(data));
       setAuthUser(data);
     } catch (error) {
-      setError(error.ToString());
-      toast.error(error.toString());
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
   };
-  return { loading, login, error };
+  return { loading, login };
 };
 
 export default useLogin;
