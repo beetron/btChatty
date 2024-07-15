@@ -3,7 +3,6 @@ import Message from "./Message";
 
 const Messages = () => {
   // const { loading, messages } = useGetMessages();
-  console.log("Friendlist/Messages", messages);
 
   return (
     <div className="px-4 flex-1 overflow-auto scrollbar-primary">

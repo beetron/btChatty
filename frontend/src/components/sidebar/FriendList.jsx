@@ -1,10 +1,7 @@
 import Friend from "./Friend";
-// import friendStore from "../../store/friendStore";
 import useGetFriends from "../../hooks/useGetFriends";
 
 const FriendList = () => {
-  // const { selectedFriend, setSelectedFriend } = friendStore();
-  // const selectedFriend = friendStore((state) => state.selectFriend);
   const { loading, friends } = useGetFriends();
 
   if (loading) {

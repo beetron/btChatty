@@ -1,13 +1,15 @@
 import React from "react";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
+import friendStore from "../../store/friendStore";
 
 const MessageContainer = () => {
-  const noFriendSelected = true;
+  // const noFriendSelected = true;
+  const { selectedFriend } = friendStore();
 
   return (
     <div className="md:min-w-[450px] flex flex-col">
-      {noFriendSelected ? (
+      {!selectedFriend ? (
         <NoFriendSelected />
       ) : (
         <>
