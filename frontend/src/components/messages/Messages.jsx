@@ -1,8 +1,8 @@
 import Message from "./Message";
-import useGetMessages from "../../hooks/useGetMessages";
+// import useGetMessages from "../../hooks/useGetMessages";
 
 const Messages = () => {
-  const { loading, messages } = useGetMessages();
+  // const { loading, messages } = useGetMessages();
   console.log("Friendlist/Messages", messages);
 
   return (
