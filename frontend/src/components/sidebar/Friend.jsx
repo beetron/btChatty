@@ -6,11 +6,11 @@ const Friend = ({ friend }) => {
 
   // Handle selected state
   const handleSelected = () => {
-    setSelectedFriend(friend._id);
+    setSelectedFriend(friend);
   };
 
   // Double check selected friend
-  const isSelected = selectedFriend === friend._id;
+  const isSelected = selectedFriend === friend;
 
   return (
     <>
