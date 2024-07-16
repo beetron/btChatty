@@ -9,6 +9,7 @@ const useGetFriends = () => {
   useEffect(() => {
     const getFriends = async () => {
       setLoading(true);
+
       try {
         const res = await fetch("/api/users/friendlist", {
           method: "GET",
