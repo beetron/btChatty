@@ -26,7 +26,7 @@ const useSendMessage = () => {
       }
 
       // Update messages store
-      setMessages([...messages, data.message]);
+      setMessages([...messages, data]);
     } catch (error) {
       toast.error(error.message);
     } finally {
