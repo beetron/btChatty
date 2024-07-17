@@ -3,7 +3,7 @@ import friendStore from "../store/friendStore";
 
 const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages, selectedFriend] = friendStore();
+  const { messages, setMessages, selectedFriend } = friendStore();
 
   useEffect(() => {
     const getMessages = async () => {
@@ -17,7 +17,6 @@ const useGetMessages = () => {
         if (data.error) {
           throw new Error(data.error);
         }
-
         // Update messages store
         setMessages(data);
       } catch (error) {
@@ -25,8 +24,8 @@ const useGetMessages = () => {
       } finally {
         setLoading(false);
       }
-      if (selectedFriend?._id) getMessages();
     };
+    if (selectedFriend?._id) getMessages();
   }, [selectedFriend?._id, setMessages]);
   return { loading, messages };
 };

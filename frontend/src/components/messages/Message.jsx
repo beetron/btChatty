@@ -1,5 +1,6 @@
 import { useAuthContext } from "../../context/AuthContext";
 import friendStore from "../../store/friendStore";
+import { dateTimeConverter } from "../../utils/dateTimeConverter";
 
 const Message = ({ message }) => {
   const { authUser } = useAuthContext();
@@ -8,10 +9,14 @@ const Message = ({ message }) => {
   // Identify the sender of the message
   const sender = authUser._id === message.senderId;
   const messageClassName = sender ? "chat-end" : "chat-start";
+  // Set profilePhoto based on sender
   const profilePhoto = sender
     ? authUser.profilePhoto
     : selectedFriend.profilePhoto;
+
+  // Set bg color based on sender
   const messageBgColor = sender ? "bg-blue-400" : "bg-gray-400";
+  const formattedDateTime = dateTimeConverter(message.createdAt);
 
   return (
     <div className={`chat ${messageClassName}`}>
@@ -23,7 +28,7 @@ const Message = ({ message }) => {
       <div className={`chat-bubble text-white ${messageBgColor}`}>
         {message.message}
       </div>
-      <div className="chat-footer opacity-50">{message.createdAt}</div>
+      <div className="pb-1 chat-footer opacity-50">{formattedDateTime}</div>
     </div>
   );
 };
