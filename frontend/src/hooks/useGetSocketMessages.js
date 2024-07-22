@@ -9,7 +9,6 @@ const useGetSocketMessages = () => {
     socket?.on("newMessage", (newMessage) => {
       setMessages([...messages, newMessage]);
     });
-    console.log("useGetSocketMessages was called");
     return () => socket?.off("newMessage");
   }, [socket, setMessages, messages]);
 };
