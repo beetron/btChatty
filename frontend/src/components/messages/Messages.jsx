@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import Message from "./Message";
 import useGetMessages from "../../hooks/useGetMessages";
+import useGetSocketMessages from "../../hooks/useGetSocketMessages";
 
 const Messages = () => {
   const { loading, messages } = useGetMessages();
   const lastMessageRef = useRef();
+  useGetSocketMessages();
   const [renderMessage, setRenderMessages] = useState(false);
 
   // useEffect(() => {

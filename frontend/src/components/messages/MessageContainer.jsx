@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 import friendStore from "../../store/friendStore";
+import { useAuthContext } from "../../context/AuthContext";
 
 const MessageContainer = () => {
   // const noFriendSelected = true;
@@ -35,12 +36,15 @@ const MessageContainer = () => {
 export default MessageContainer;
 
 const NoFriendSelected = () => {
+  const { authUser } = useAuthContext();
+
   return (
     <div className="flex items-center justify-center w-full h-full">
       <div
         className="px-4 text-center sm:text-lg md:text-xl 
       text-gray-200 font-semibold flex flex-col items-center gap-2"
       >
+        <p>{`Hi, ${authUser.nickname}. `}</p>
         <p>Welcome message or hint/tips</p>
         <p>How to use app here</p>
       </div>
