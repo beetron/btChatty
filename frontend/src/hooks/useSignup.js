@@ -4,10 +4,15 @@ import { useAuthContext } from "../context/AuthContext";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
-  const { authUser, setAuthUser } = useAuthContext();
+  const { setAuthUser } = useAuthContext();
 
-  const signup = async ({ username, password, confirmPassword }) => {
-    const isDataValid = validateData({ username, password, confirmPassword });
+  const signup = async ({ username, password, confirmPassword, uniqueId }) => {
+    const isDataValid = validateData({
+      username,
+      password,
+      confirmPassword,
+      uniqueId,
+    });
     if (!isDataValid) return;
 
     setLoading(true);
@@ -18,7 +23,7 @@ const useSignup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password, confirmPassword }),
+        body: JSON.stringify({ username, password, confirmPassword, uniqueId }),
       });
 
       const data = await res.json();
@@ -43,7 +48,7 @@ const useSignup = () => {
 
 export default useSignup;
 
-function validateData({ username, password, confirmPassword }) {
+function validateData({ username, password, confirmPassword, uniqueId }) {
   if (
     password.length < 6 ||
     confirmPassword.length < 6 ||
@@ -55,6 +60,11 @@ function validateData({ username, password, confirmPassword }) {
 
   if (password !== confirmPassword) {
     toast.error("Passwords do not match");
+    return false;
+  }
+
+  if (!uniqueId) {
+    toast.error("Unique ID is missing");
     return false;
   }
 

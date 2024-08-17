@@ -5,9 +5,9 @@ import generateTokenAndSetCookie from "../utility/generateToken.js";
 // Signup
 export const signup = async (req, res) => {
   try {
-    const { username, password, confirmPassword } = req.body;
+    const { username, password, confirmPassword, uniqueId } = req.body;
 
-    // Check if user chosen passwords match
+    // Check if chosen passwords match
     if (password != confirmPassword) {
       return res.status(400).json({ error: "Password mismatch" });
     }
@@ -17,6 +17,13 @@ export const signup = async (req, res) => {
 
     if (user) {
       return res.status(400).json({ error: "Username is taken" });
+    }
+
+    // Check if friend's uniqueId exists
+    const friend = await User.findOne({ uniqueId });
+
+    if (!friend) {
+      return res.status(400).json({ error: "Friend's Unique ID incorrect" });
     }
 
     // Hash password
@@ -29,16 +36,23 @@ export const signup = async (req, res) => {
     // const femaleProfilePic =
     //   "https://avatar.iran.liara.run/public/girl?username=${username}";
 
+    // Friend that shared uniqueId is added to friendList
     const newUser = new User({
       username: username,
       password: hashedPassword,
       profilePhoto: maleProfilePic,
+      friendList: [friend._id],
     });
 
     if (newUser) {
       // Generate JWT token
       generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
+
+      // Update the friend's friendList with the new user's _id
+      await User.findByIdAndUpdate(friend._id, {
+        $push: { friendList: newUser._id },
+      });
 
       res.status(201).json({
         _id: newUser._id,

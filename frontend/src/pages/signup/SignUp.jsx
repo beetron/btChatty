@@ -8,6 +8,7 @@ const SignUp = () => {
     username: "",
     password: "",
     confirmPassword: "",
+    uniqueId: "",
   });
 
   const { loading, signup } = useSignup();
@@ -21,7 +22,7 @@ const SignUp = () => {
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg bg-gray-400 shadow-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
         <h1 className="text-3xl font-semibold text-center text-gray-300">
-          Sign up for <span className="text-blue-400">btChatty</span>
+          Sign up - <span className="text-blue-400">btChatty</span>
         </h1>
         <form onSubmit={submitForm}>
           <div>
@@ -30,7 +31,7 @@ const SignUp = () => {
             </label>
             <input
               type="text"
-              placeholder=""
+              placeholder="Must be at least 6 characters"
               className="w-full input input-bordered h-10"
               value={inputs.username}
               onChange={(e) =>
@@ -58,21 +59,35 @@ const SignUp = () => {
             </label>
             <input
               type="password"
-              placeholder="Must be at least 6 characters"
+              placeholder="Input password again"
               className="w-full input input-bordered h-10"
               value={inputs.confirmPassword}
               onChange={(e) =>
                 setInputs({ ...inputs, confirmPassword: e.target.value })
               }
             />
+          </div>
+          <div>
+            <label className="label">
+              <span className="text-base label-text">Friend's Unique ID</span>
+            </label>
+            <input
+              type="text"
+              placeholder=""
+              className="w-full input input-bordered h-10"
+              value={inputs.uniqueId}
+              onChange={(e) =>
+                setInputs({ ...inputs, uniqueId: e.target.value })
+              }
+            />
+          </div>
+          <div>
             <Link
               to="/login"
               className="text-sm hover:underline hover:text-blue-400 mt-4 inline-block"
             >
               Already have an account?
             </Link>
-          </div>
-          <div>
             <button
               className="btn btn-block btn-sm mt-2 border border-slate-700"
               disabled={loading}
