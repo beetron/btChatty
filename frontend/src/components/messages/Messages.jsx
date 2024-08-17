@@ -9,12 +9,6 @@ const Messages = () => {
   useGetSocketMessages();
   const [renderMessage, setRenderMessages] = useState(false);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     lastMessageRef.current?.scrollIntoView({ behavior: "auto" });
-  //   }, 100);
-  // }, [messages]);
-
   useEffect(() => {
     if (!loading && messages.length > 0) {
       // Wait for the next event loop tick to ensure the messages are in the DOM
