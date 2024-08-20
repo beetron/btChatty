@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: [process.env.DEVELOPMENT_URL, process.env.PRODUCTION_URL],
     methods: ["GET", "POST"],
   },
 });
@@ -25,15 +25,23 @@ io.on("connection", (socket) => {
   // Get userId from query on connection to socket
   const userId = socket.handshake.query.userId;
 
-  if (userId != "undefined") {
+  if (userId && userId !== "undefined") {
     userSocketMap[userId] = socket.id;
+  } else {
+    console.log("Invalid userId:", userId);
   }
+
+  // if (userId != "undefined") {
+  //   userSocketMap[userId] = socket.id;
+  // }
 
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
   socket.on("disconnect", () => {
     console.log("client has disconnected", socket.id);
-    delete userSocketMap[userId];
+    if (userId && userId !== "undefined") {
+      delete userSocketMap[userId];
+    }
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
