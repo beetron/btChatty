@@ -3,7 +3,7 @@ import Friends from "../../components/sidebar/Friends";
 
 const Home = () => {
   return (
-    <div className="flex rounded-lg overflow-hidden">
+    <div className="w-3/4 max-w-lg">
       <Friends />
     </div>
   );

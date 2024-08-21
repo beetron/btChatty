@@ -10,7 +10,7 @@ import Messages from "./pages/messages/Messages";
 function App() {
   const { authUser } = useAuthContext();
   return (
-    <div className="min-h-screen flex items-center justify-center ">
+    <div className="min-h-screen w-full flex items-start justify-center">
       <Routes>
         <Route path="/" element={authUser ? <Home /> : <Login />} />
         <Route path="/messages" element={authUser ? <Messages /> : <Login />} />

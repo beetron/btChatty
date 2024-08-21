@@ -5,11 +5,12 @@ import LogoutButton from "./LogoutButton";
 
 const Friends = () => {
   return (
-    <div className="border-r border-slate-500 p-4 w-64 flex flex-col">
+    <div className="w-full max-w-none flex flex-col items-start mt-4">
+      <LogoutButton />
+      <div className="divider px-3"></div>
       <SearchInput />
       <div className="divider px-3"></div>
       <FriendList />
-      <LogoutButton />
     </div>
   );
 };

@@ -9,7 +9,7 @@ const FriendList = () => {
   }
 
   return (
-    <div className="py-2 flex flex-col overflow-auto">
+    <div className="w-full">
       {friends.map((friend) => (
         <Friend key={friend._id} friend={friend} />
       ))}

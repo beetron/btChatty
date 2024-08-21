@@ -19,9 +19,9 @@ const Friend = ({ friend }) => {
           <img src={friend.profilePhoto} className="w-full h-full" />
         </div>
         <div className="flex flex-col flex-1">
-          <div className="flex gap-3 justify-between">
+          <div className="flex gap-3 justify-start">
             <p className="font-bold text-gray-200">{friend.nickname}</p>
-            <span className="text-xl">🍕</span>
+            <span className="text-xl ">🍕</span>
           </div>
         </div>
       </div>

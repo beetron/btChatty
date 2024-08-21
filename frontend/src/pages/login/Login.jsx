@@ -16,7 +16,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center mx-auto">
       <div className="w-full p-6 rounded-lg ">
         <h1 className="mb-4 text-4xl font-semibold text-center">
           <span className="text-blue-300">btChatty </span>
