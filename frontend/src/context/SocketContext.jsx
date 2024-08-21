@@ -18,8 +18,6 @@ export const SocketContextProvider = ({ children }) => {
       ? import.meta.env.VITE_PRODUCTION_URL
       : import.meta.env.VITE_DEVELOPMENT_URL;
 
-  console.log(socketURL);
-
   useEffect(() => {
     if (authUser) {
       const socket = io(socketURL, {

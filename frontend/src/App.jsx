@@ -10,20 +10,15 @@ import Messages from "./pages/messages/Messages";
 function App() {
   const { authUser } = useAuthContext();
   return (
-    <section className="min-h-screen flex items-center justify-center">
-      <div className="md:w-32 lg:w-48">
-        <Routes>
-          <Route path="/" element={authUser ? <Home /> : <Login />} />
-          <Route
-            path="/messages"
-            element={authUser ? <Messages /> : <Login />}
-          />
-          <Route path="/login" element={authUser ? <Home /> : <Login />} />
-          <Route path="/signup" element={authUser ? <Home /> : <SignUp />} />
-        </Routes>
-        <Toaster />
-      </div>
-    </section>
+    <div className="min-h-screen flex items-center justify-center ">
+      <Routes>
+        <Route path="/" element={authUser ? <Home /> : <Login />} />
+        <Route path="/messages" element={authUser ? <Messages /> : <Login />} />
+        <Route path="/login" element={authUser ? <Home /> : <Login />} />
+        <Route path="/signup" element={authUser ? <Home /> : <SignUp />} />
+      </Routes>
+      <Toaster />
+    </div>
   );
 }
 
