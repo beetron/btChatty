@@ -17,9 +17,9 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg bg-gray-400 shadow-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
-        <h1 className="mb-4 text-3xl font-semibold text-center text-gray-300">
-          <span className="text-blue-400">btChatty </span>
+      <div className="w-full p-6 rounded-lg ">
+        <h1 className="mb-4 text-4xl md:text-5xl font-semibold text-center">
+          <span className="text-blue-300">btChatty </span>
         </h1>
         <form onSubmit={submitForm}>
           <div className="mt-1">

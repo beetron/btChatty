@@ -1,12 +1,12 @@
 import React from "react";
-import Friends from "../../components/sidebar/Friends";
+import MessageContainer from "../../components/messages/MessageContainer";
 
-const Home = () => {
+const Messages = () => {
   return (
     <div className="flex rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
-      <Friends />
+      <MessageContainer />
     </div>
   );
 };
 
-export default Home;
+export default Messages;
