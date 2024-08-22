@@ -6,7 +6,7 @@ import SettingsButton from "./SettingsButton";
 
 const Friends = () => {
   return (
-    <div className="w-full max-w-none flex flex-col items-start mt-4">
+    <div className="w-full max-w-none flex flex-col items-center mt-4">
       <div className="grid gap-4 grid-cols-3">
         <SettingsButton />
         <LogoutButton />

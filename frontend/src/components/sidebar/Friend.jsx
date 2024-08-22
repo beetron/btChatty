@@ -15,11 +15,9 @@ const Friend = ({ friend }) => {
         }`}
         onClick={() => setSelectedFriend(friend)}
       >
-        <div className="w-12 h-12 bg-gray-300 rounded-full overflow-hidden">
-          <img src={friend.profilePhoto} className="w-full h-full" />
-        </div>
         <div className="flex flex-col flex-1">
-          <div className="flex gap-3 justify-start">
+          <div className="flex gap-3 justify-center items-center">
+            <img src={friend.profilePhoto} className="w-12 h-12" />
             <p className="font-bold text-gray-200">{friend.nickname}</p>
             <span className="text-xl ">🍕</span>
           </div>
