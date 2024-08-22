@@ -1,4 +1,4 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import friendStore from "../../store/friendStore";
 
 const Friend = ({ friend }) => {
@@ -6,20 +6,28 @@ const Friend = ({ friend }) => {
 
   // Double check selected friend
   const isSelected = selectedFriend?._id === friend._id;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    setSelectedFriend(friend);
+    navigate("/messages");
+  };
 
   return (
     <>
       <div
-        className={`flex gap-2 items-center rounded p-2 py-1 cursor-pointer hover:bg-gray-600 ${
-          isSelected ? "bg-sky-500" : ""
-        }`}
-        onClick={() => setSelectedFriend(friend)}
+        className="flex gap-2 items-center rounded p-2 py-1 cursor-pointer hover:bg-gray-600"
+        onClick={handleClick}
       >
         <div className="flex flex-col flex-1">
-          <div className="flex gap-3 justify-center items-center">
-            <img src={friend.profilePhoto} className="w-12 h-12" />
+          <div className="grid grid-cols-3 gap-3 items-center">
+            <div className="flex justify-end">
+              <img src={friend.profilePhoto} className="w-12 h-12" />
+            </div>
             <p className="font-bold text-gray-200">{friend.nickname}</p>
-            <span className="text-xl ">🍕</span>
+            <div className="flex justify-start">
+              <span className="text-xl ">🍕</span>
+            </div>
           </div>
         </div>
       </div>

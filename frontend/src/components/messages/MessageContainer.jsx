@@ -1,32 +1,29 @@
-import { useEffect } from "react";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 import friendStore from "../../store/friendStore";
 import { useAuthContext } from "../../context/AuthContext";
 
 const MessageContainer = () => {
-  // const noFriendSelected = true;
   const { selectedFriend, setSelectedFriend } = friendStore();
 
-  useEffect(() => {
-    return () => setSelectedFriend(null);
-  }, [setSelectedFriend]);
-
   return (
-    <div className="w-[450px] flex flex-col overflow-hidden">
+    <div className="w-[450px] flex flex-col max-h-screen">
       {!selectedFriend ? (
         <NoFriendSelected />
       ) : (
         <>
-          <div className="bg-slate-500 px-4 py-2 mb-2">
+          <div className="bg-slate-500 px-4 py-2 mb-2 flex-shrink-0">
             <span className="label-text">To:</span>{" "}
             <span className="text-gray-900 font-bold">
               {selectedFriend.nickname}
             </span>
           </div>
-
-          <Messages />
-          <MessageInput />
+          <div className="flex-1 overflow-y-auto">
+            <Messages />
+          </div>
+          <div className="flex-shrink-0">
+            <MessageInput />
+          </div>
         </>
       )}
     </div>
@@ -51,21 +48,3 @@ const NoFriendSelected = () => {
     </div>
   );
 };
-
-// const MessageContainer = () => {
-//   return (
-//     <div className="md:min-w-[450px] flex flex-col">
-//       <>
-//         <div className="bg-slate-500 px-4 py-2 mb-2">
-//           <span className="label-text">To:</span>{" "}
-//           <span className="text-gray-900 font-bold">Mr. Random</span>
-//         </div>
-
-//         <Messages />
-//         <MessageInput />
-//       </>
-//     </div>
-//   );
-// };
-
-// export default MessageContainer;
