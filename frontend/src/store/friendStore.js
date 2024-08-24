@@ -1,10 +1,13 @@
 import { create } from "zustand";
 
-const friendStore = create((set) => ({
-  selectedFriend: null,
-  setSelectedFriend: (selectedFriend) => set({ selectedFriend }),
+const useFriendStore = create((set) => ({
+  selectedFriend: JSON.parse(localStorage.getItem("selectedFriend")) || null,
+  setSelectedFriend: (friend) => {
+    localStorage.setItem("selectedFriend", JSON.stringify(friend));
+    set({ selectedFriend: friend });
+  },
   messages: [],
   setMessages: (messages) => set({ messages }),
 }));
 
-export default friendStore;
+export default useFriendStore;
