@@ -3,8 +3,7 @@ import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 import friendStore from "../../store/friendStore";
 import { useAuthContext } from "../../context/AuthContext";
-import SettingsButton from "../menu/SettingsButton";
-import LogoutButton from "../menu/LogoutButton";
+import MenuContainer from "../menu/MenuContainer";
 
 const MessageContainer = () => {
   const { selectedFriend, setSelectedFriend } = friendStore();
@@ -19,10 +18,7 @@ const MessageContainer = () => {
     <div className="w-full flex flex-col max-h-screen">
       <>
         <div className="fixed top-0 left-0 flex items-center bg-slate-500 w-full p-1">
-          <div className="flex justify-end w-full gap-4">
-            <SettingsButton />
-            <LogoutButton />
-          </div>
+          <MenuContainer isHomeScreen={false} />
         </div>
         <div className=" mt-9 bg-slate-500 px-4 py-2 mb-2 w-full">
           <span className="label-text">To:</span>{" "}
