@@ -16,7 +16,7 @@ export const getFriendList = async (req, res) => {
     // Get user data based off of objectIdFriendList
     const friendListData = await User.find({
       _id: { $in: friendList },
-    }).select("-password");
+    }).select("nickname profilePhoto");
     res.status(200).json(friendListData);
   } catch (error) {
     console.log("Error in getFriendList controller: ", error.message);
