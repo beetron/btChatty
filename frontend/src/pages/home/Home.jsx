@@ -1,5 +1,5 @@
 import React from "react";
-import Friends from "../../components/sidebar/Friends";
+import Friends from "../../components/friends/Friends";
 
 const Home = () => {
   return (
