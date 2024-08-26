@@ -3,8 +3,10 @@ import Friends from "../../components/friends/Friends";
 
 const Home = () => {
   return (
-    <div className="w-3/4 max-w-lg">
-      <Friends />
+    <div className="flex max-w-[500px] rounded-lg w-full overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
+      <div className="max-h-screen overflow-y-auto w-full">
+        <Friends />
+      </div>
     </div>
   );
 };
