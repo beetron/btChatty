@@ -1,9 +1,16 @@
-import React from "react";
+import { useEffect } from "react";
 import SearchInput from "./SearchInput";
 import FriendList from "./FriendList";
 import MenuContainer from "../menu/MenuContainer";
+import friendStore from "../../store/friendStore";
 
 const Friends = () => {
+  const { setSelectedFriend } = friendStore();
+
+  useEffect(() => {
+    setSelectedFriend(null);
+  }, []);
+
   return (
     <div className="max-w-[500px] flex flex-col items-center">
       <div className="fixed top-0 left-0 flex items-center bg-slate-500 w-full p-1">
