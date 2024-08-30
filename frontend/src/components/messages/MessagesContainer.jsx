@@ -5,7 +5,7 @@ import friendStore from "../../store/friendStore";
 import { useAuthContext } from "../../context/AuthContext";
 import MenuContainer from "../menu/MenuContainer";
 
-const MessageContainer = () => {
+const MessagesContainer = () => {
   const { selectedFriend, setSelectedFriend } = friendStore();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const MessageContainer = () => {
   );
 };
 
-export default MessageContainer;
+export default MessagesContainer;
 
 const NoFriendSelected = () => {
   const { authUser } = useAuthContext();

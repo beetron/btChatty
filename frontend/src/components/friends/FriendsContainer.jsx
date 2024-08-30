@@ -4,7 +4,7 @@ import FriendList from "./FriendList";
 import MenuContainer from "../menu/MenuContainer";
 import friendStore from "../../store/friendStore";
 
-const Friends = () => {
+const FriendsContainer = () => {
   const { setSelectedFriend } = friendStore();
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const Friends = () => {
   );
 };
 
-export default Friends;
+export default FriendsContainer;
