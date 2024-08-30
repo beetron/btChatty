@@ -2,10 +2,8 @@ import { useNavigate } from "react-router-dom";
 import friendStore from "../../store/friendStore";
 
 const Friend = ({ friend }) => {
-  const { selectedFriend, setSelectedFriend } = friendStore();
+  const { setSelectedFriend } = friendStore();
 
-  // Double check selected friend
-  const isSelected = selectedFriend?._id === friend._id;
   const navigate = useNavigate();
 
   const handleClick = () => {
