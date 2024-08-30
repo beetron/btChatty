@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
     },
     uniqueId: {
       type: String,
-      maxLength: 12,
+      maxLength: 18,
       unique: true,
       default: function () {
         return this.username;
