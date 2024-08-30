@@ -9,7 +9,7 @@ const MenuContainer = ({ isHomeScreen }) => {
         {!isHomeScreen && <HomeButton />}
       </div>
       <div className="flex justify-end w-full gap-4 mr-2">
-        <SettingsButton />
+        {isHomeScreen && <SettingsButton />}
         <LogoutButton />
       </div>
     </div>
