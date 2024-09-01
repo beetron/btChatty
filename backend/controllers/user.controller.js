@@ -177,6 +177,7 @@ export const removeFriend = async (req, res) => {
   }
 };
 
+// Update nickname
 export const updateNickname = async (req, res) => {
   // Get user data
   const user = req.user;
@@ -191,6 +192,34 @@ export const updateNickname = async (req, res) => {
     return res.status(200).json({ message: "Nickname updated" });
   } catch (error) {
     console.log("Error in updateNickname controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Update uniqueId
+export const updateUniqueId = async (req, res) => {
+  // Get user data
+  const user = req.user;
+
+  // Retrieve uniqueId from request params
+  const { uniqueId } = req.params;
+
+  try {
+    // Check if uniqueId is already taken
+    const uniqueIdExists = await User.findOne({
+      uniqueId,
+      _id: { $ne: user._id },
+    });
+    if (uniqueIdExists) {
+      return res.status(400).json({ error: "UniqueId already taken" });
+    }
+
+    user.uniqueId = uniqueId;
+    await user.save();
+
+    return res.status(200).json({ message: "UniqueId updated" });
+  } catch (error) {
+    console.log("Error in updateUniqueId controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
