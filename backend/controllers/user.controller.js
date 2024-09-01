@@ -176,3 +176,21 @@ export const removeFriend = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const updateNickname = async (req, res) => {
+  // Get user data
+  const user = req.user;
+
+  // Retrieve nickname from request params
+  const { nickname } = req.params;
+
+  try {
+    user.nickname = nickname;
+    await user.save();
+
+    return res.status(200).json({ message: "Nickname updated" });
+  } catch (error) {
+    console.log("Error in updateNickname controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
