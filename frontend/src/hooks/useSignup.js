@@ -49,6 +49,14 @@ const useSignup = () => {
 export default useSignup;
 
 function validateData({ username, password, confirmPassword, uniqueId }) {
+  // Regex patterns 0-9, a-z, A-Z, !@#$%^&*, no 2-byte characters
+  const regEx = /^[0-9a-zA-Z!@#$%^&*]+$/;
+  if (regEx.test(username) || regEx.test(password)) {
+    toast.error(
+      "Usernname/Password can only have alphabets, numbers, and !@#$%^&*. No 2-byte characters allowed."
+    );
+    return false;
+  }
   if (
     password.length < 6 ||
     confirmPassword.length < 6 ||
