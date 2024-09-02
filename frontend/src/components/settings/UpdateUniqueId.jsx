@@ -6,7 +6,8 @@ const UpdateUniqueId = () => {
   return (
     <div className="flex flex-col justify-center items-start">
       <p className="dark:text-white text-2xl m-3">
-        UniqueId (for friend requests)
+        Change UniqueId <br />
+        (Used for friend requests)
       </p>
       <div className="flex justify-start w-full">
         <input
