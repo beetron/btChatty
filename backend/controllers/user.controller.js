@@ -38,7 +38,7 @@ export const getFriendRequests = async (req, res) => {
     // Get user data based off of objectId friendRequests
     const friendRequestsIds = await User.find({
       _id: { $in: friendRequests },
-    }).select("_id nickname profilePhoto");
+    }).select("_id uniqueId nickname profilePhoto");
 
     res.status(200).json(friendRequestsIds);
   } catch (error) {
@@ -118,8 +118,6 @@ export const acceptFriendRequest = async (req, res) => {
     // Remove requestSender from user's friendRequests
     user.friendRequests.pull(requestSender._id);
 
-    console.log("User: ", user);
-
     // Save user database
     user.save();
 
@@ -130,6 +128,38 @@ export const acceptFriendRequest = async (req, res) => {
     return res.status(200).json({ message: "Friend request accepted" });
   } catch (error) {
     console.log("Error in acceptFriendRequest controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Deny friend request
+export const denyFriendRequest = async (req, res) => {
+  // Get user data
+  const user = req.user;
+
+  // Retrieve uniqueId from request params
+  const { uniqueId } = req.params;
+
+  try {
+    // Find user sending the friend request
+    const requestSender = await User.findOne({ uniqueId }).select(
+      "_id friendRequests"
+    );
+
+    // Check if requester exists
+    if (!requestSender) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    // Remove requestSender from user's friendRequests
+    user.friendRequests.pull(requestSender._id);
+
+    // Save user database
+    user.save();
+
+    return res.status(200).json({ message: "Denied friend request" });
+  } catch (error) {
+    console.log("Error in denyFriendRequest controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
