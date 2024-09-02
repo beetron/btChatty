@@ -27,7 +27,9 @@ const SignUp = () => {
         <form onSubmit={submitForm}>
           <div>
             <label className="label">
-              <span className="text-base label-text">Username</span>
+              <span className="text-base label-text">
+                Username (case sensitive)
+              </span>
             </label>
             <input
               type="text"
