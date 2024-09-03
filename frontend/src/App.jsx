@@ -7,6 +7,7 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import Messages from "./pages/messages/Messages";
 import Settings from "./pages/settings/Settings";
+import FriendSettings from "./pages/friendSettings/FriendSettings";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -18,6 +19,10 @@ function App() {
         <Route path="/settings" element={authUser ? <Settings /> : <Login />} />
         <Route path="/login" element={authUser ? <Home /> : <Login />} />
         <Route path="/signup" element={authUser ? <Home /> : <SignUp />} />
+        <Route
+          path="/friendsettings"
+          element={authUser ? <FriendSettings /> : <Login />}
+        />
       </Routes>
       <Toaster />
     </div>
