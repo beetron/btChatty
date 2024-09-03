@@ -5,7 +5,7 @@ const FriendSettingsButton = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/friendsettings");
+    navigate("/friend-settings");
   };
 
   return (
