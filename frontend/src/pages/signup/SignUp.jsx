@@ -61,7 +61,7 @@ const SignUp = () => {
             </label>
             <input
               type="password"
-              placeholder="Input password again"
+              placeholder=""
               className="w-full input input-bordered h-10"
               value={inputs.confirmPassword}
               onChange={(e) =>
