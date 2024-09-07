@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import toast from "react-hot-toast";
 import useAddFriend from "../../hooks/useAddFriend";
 
 const AddFriend = () => {
   const [uniqueId, setUniqueId] = useState(null);
   const { addFriend, loading } = useAddFriend();
+  const inputRef = useRef(null);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -12,6 +13,7 @@ const AddFriend = () => {
       return toast.error("Unique ID are minimum 6 characters long.");
     }
     addFriend(uniqueId);
+    inputRef.current.value = "";
   };
 
   return (
@@ -23,6 +25,7 @@ const AddFriend = () => {
           placeholder="Enter friend's unique ID"
           className="input input-bordered w-1/2 max-w-xs"
           onChange={(e) => setUniqueId(e.target.value)}
+          ref={inputRef}
         />
         <button
           className="btn btn-accent btn-md ms-2"
