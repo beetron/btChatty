@@ -1,3 +1,6 @@
+import AcceptButton from "./AcceptButton.jsx";
+import RejectButton from "./RejectButton.jsx";
+
 const FriendRequest = ({ friendRequest }) => {
   return (
     <>
@@ -5,6 +8,10 @@ const FriendRequest = ({ friendRequest }) => {
         <div className="flex justify-start gap-4 items-center m-2">
           <img src={friendRequest.profilePhoto} className="w-12 h-12" />
           <p className="font-bold text-gray-200">{friendRequest.nickname}</p>
+        </div>
+        <div className="flex gap-3 items-center">
+          <AcceptButton />
+          <RejectButton />
         </div>
       </div>
 
