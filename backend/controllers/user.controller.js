@@ -133,7 +133,7 @@ export const acceptFriendRequest = async (req, res) => {
 };
 
 // Deny friend request
-export const denyFriendRequest = async (req, res) => {
+export const rejectFriendRequest = async (req, res) => {
   // Get user data
   const user = req.user;
 

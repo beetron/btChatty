@@ -5,7 +5,7 @@ import {
   getFriendRequests,
   addFriendRequest,
   acceptFriendRequest,
-  denyFriendRequest,
+  rejectFriendRequest,
   removeFriend,
   updateNickname,
   updateUniqueId,
@@ -17,7 +17,7 @@ router.get("/friendlist", protectRoute, getFriendList);
 router.get("/friendrequests", protectRoute, getFriendRequests);
 router.put("/addfriend/:uniqueId", protectRoute, addFriendRequest);
 router.put("/acceptfriend/:uniqueId", protectRoute, acceptFriendRequest);
-router.put("/denyfriend/:uniqueId", protectRoute, denyFriendRequest);
+router.put("/rejectfriend/:uniqueId", protectRoute, rejectFriendRequest);
 router.put("/removefriend/:uniqueId", protectRoute, removeFriend);
 router.put("/updatenickname/:nickname", protectRoute, updateNickname);
 router.put("/updateuniqueid/:uniqueId", protectRoute, updateUniqueId);
