@@ -78,6 +78,12 @@ export const addFriendRequest = async (req, res) => {
       return res.status(400).json({ error: "Friend request already sent" });
     }
 
+    // Check if user is already a friend
+    if (requestReceiver.friendList.includes(user._id)) {
+      console.log({ error: "Already friends" });
+      return res.status(400).json({ error: "Already friends" });
+    }
+
     requestReceiver.friendRequests.push(user._id);
     await requestReceiver.save();
 
