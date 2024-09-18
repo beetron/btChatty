@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import FriendRequest from "./FriendRequest";
+import useFriendStore from "../../store/friendStore";
 import useGetFriendRequests from "../../hooks/useGetFriendRequests";
 
 const FriendRequests = () => {
-  const { loading, friendRequests } = useGetFriendRequests();
+  const { render } = useFriendStore();
+  const { loading, friendRequests, getFriendRequests } = useGetFriendRequests();
+
+  useEffect(() => {
+    getFriendRequests();
+  }, [render]);
 
   return (
     <>
