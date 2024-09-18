@@ -1,7 +1,7 @@
 import AcceptButton from "./AcceptButton.jsx";
 import RejectButton from "./RejectButton.jsx";
 
-const FriendRequest = ({ friendRequest, onUpdate }) => {
+const FriendRequest = ({ friendRequest }) => {
   return (
     <>
       <div className="grid grid-cols-3 gap-3 items-center">
@@ -10,7 +10,7 @@ const FriendRequest = ({ friendRequest, onUpdate }) => {
           <p className="font-bold text-gray-200">{friendRequest.nickname}</p>
         </div>
         <div className="flex gap-3 items-center">
-          <AcceptButton friendRequest={friendRequest} onUpdate={onUpdate} />
+          <AcceptButton friendRequest={friendRequest} />
           <RejectButton friendRequest={friendRequest} />
         </div>
       </div>

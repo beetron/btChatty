@@ -5,8 +5,7 @@ const AcceptButton = ({ friendRequest, onUpdate }) => {
   const { loading, acceptFriendRequest } = useAcceptFriendRequest();
 
   const handleClick = async () => {
-    await acceptFriendRequest(friendRequest.uniqueId);
-    onUpdate();
+    // await acceptFriendRequest(friendRequest.uniqueId);
   };
 
   return (
