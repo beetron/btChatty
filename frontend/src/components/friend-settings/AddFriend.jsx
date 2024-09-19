@@ -28,7 +28,7 @@ const AddFriend = () => {
           ref={inputRef}
         />
         <button
-          className="btn btn-accent btn-md ms-2"
+          className="btn btn-accent bg-blue-500 text-white btn-md ms-2"
           onClick={handleClick}
           disabled={loading}
         >
