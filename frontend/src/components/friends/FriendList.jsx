@@ -8,9 +8,13 @@ const FriendList = () => {
     return <div className="loading loading-spinner">Loading...</div>;
   }
 
+  const sortedFriends = friends.sort(
+    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+  );
+
   return (
     <div className="w-full">
-      {friends.map((friend) => (
+      {sortedFriends.map((friend) => (
         <Friend key={friend._id} friend={friend} />
       ))}
     </div>
