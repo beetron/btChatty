@@ -1,5 +1,6 @@
-import { request } from "express";
 import User from "../models/user.model.js";
+import Message from "../models/message.model.js";
+import Conversation from "../models/conversation.model.js";
 
 // Get user friend list
 export const getFriendList = async (req, res) => {
@@ -17,7 +18,29 @@ export const getFriendList = async (req, res) => {
     const friendListData = await User.find({
       _id: { $in: friendList },
     }).select("nickname profilePhoto");
-    res.status(200).json(friendListData);
+
+    // Check for unread message status with each friend
+    const friendListWithUnreadStatus = await Promise.all(
+      friendListData.map(async (friend) => {
+        const conversation = await Conversation.findOne({
+          participants: { $all: [user._id, friend._id] },
+        }).populate("messages");
+
+        let unreadMessages = false;
+
+        if (conversation) {
+          unreadMessages = conversation.messages.some(
+            (message) => !message.readBy.includes(user._id)
+          );
+        }
+
+        return {
+          ...friend.toObject(),
+          unreadMessages,
+        };
+      })
+    );
+    res.status(200).json(friendListWithUnreadStatus);
   } catch (error) {
     console.log("Error in getFriendList controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
