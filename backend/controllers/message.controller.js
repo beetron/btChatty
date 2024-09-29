@@ -62,6 +62,24 @@ export const getMessages = async (req, res) => {
 
     const messages = conversation.messages;
 
+    // Filter unread messages
+    const unreadMessage = messages.filter(
+      (message) => !message.readBy.includes(userId)
+    );
+
+    // Update readBy field
+    if (unreadMessage.length > 0) {
+      const bulkUpdate = unreadMessage.map((message) => ({
+        updateOne: {
+          filter: { _id: message._id },
+          update: { $addToSet: { readBy: userId } },
+        },
+      }));
+
+      // Save database
+      await Message.bulkWrite(bulkUpdate);
+    }
+
     res.status(200).json(messages);
   } catch (error) {
     console.log("Error in getMessages controller: ", error.message);
