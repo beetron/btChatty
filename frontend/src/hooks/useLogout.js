@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const useLogout = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+  const navigate = useNavigate();
 
   const logout = async () => {
     setLoading(true);
@@ -24,6 +26,9 @@ const useLogout = () => {
       // Remove user from local storage
       localStorage.removeItem("btchatty-user");
       setAuthUser(null);
+
+      // Return to login
+      navigate("/login");
     } catch (error) {
       toast.error(error);
     } finally {
