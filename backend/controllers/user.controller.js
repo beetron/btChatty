@@ -1,5 +1,4 @@
 import User from "../models/user.model.js";
-import Message from "../models/message.model.js";
 import Conversation from "../models/conversation.model.js";
 
 // Get user friend list
@@ -28,6 +27,9 @@ export const getFriendList = async (req, res) => {
 
         let unreadMessages = false;
 
+        // Get last updated timestamp for each conversation
+        const updatedAt = conversation ? conversation.updatedAt : null;
+
         if (conversation) {
           unreadMessages = conversation.messages.some(
             (message) => !message.readBy.includes(user._id)
@@ -37,6 +39,7 @@ export const getFriendList = async (req, res) => {
         return {
           ...friend.toObject(),
           unreadMessages,
+          updatedAt,
         };
       })
     );
