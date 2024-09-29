@@ -24,7 +24,7 @@ const Friend = ({ friend }) => {
             </div>
             <p className="font-bold text-gray-200">{friend.nickname}</p>
             <div className="flex justify-start">
-              <span className="text-xl ">🍕</span>
+              {friend.unreadMessages && <span className="text-xl">❕</span>}
             </div>
           </div>
         </div>
