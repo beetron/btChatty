@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 import friendStore from "../../store/friendStore";
-import { useAuthContext } from "../../context/AuthContext";
 import MenuContainer from "../menu/MenuContainer";
 
 const MessagesContainer = () => {
