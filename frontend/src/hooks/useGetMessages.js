@@ -3,7 +3,7 @@ import friendStore from "../store/friendStore";
 
 const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
-  const { messages, setMessages, selectedFriend } = friendStore();
+  const { messages, setMessages, selectedFriend, render } = friendStore();
 
   useEffect(() => {
     const getMessages = async () => {
@@ -12,7 +12,7 @@ const useGetMessages = () => {
       try {
         const res = await fetch(`/api/messages/get/${selectedFriend._id}`);
         const data = await res.json();
-
+        console.log("useGetMessage was ran");
         // Check data for errors
         if (data.error) {
           throw new Error(data.error);
@@ -25,8 +25,9 @@ const useGetMessages = () => {
         setLoading(false);
       }
     };
-    if (selectedFriend?._id) getMessages();
-  }, [selectedFriend?._id, setMessages]);
+    getMessages();
+  }, [setMessages, render]);
+
   return { loading, messages };
 };
 

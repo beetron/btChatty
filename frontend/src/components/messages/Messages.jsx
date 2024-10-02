@@ -1,22 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Message from "./Message";
 import useGetMessages from "../../hooks/useGetMessages";
 import useGetSocketMessages from "../../hooks/useGetSocketMessages";
+import friendStore from "../../store/friendStore";
 
 const Messages = () => {
+  // render dependency used for useGetMessages() hook
+  const { render } = friendStore();
   const { loading, messages } = useGetMessages();
   const lastMessageRef = useRef();
   useGetSocketMessages();
-  const [renderMessage, setRenderMessages] = useState(false);
 
   useEffect(() => {
     if (!loading && messages.length > 0) {
       // Wait for the next event loop tick to ensure the messages are in the DOM
       lastMessageRef.current?.scrollIntoView({ behavior: "auto" });
-      // After scrolling, allow messages to be rendered
-      setRenderMessages(true);
-    } else {
-      setRenderMessages(false);
     }
   }, [loading, messages]);
 
