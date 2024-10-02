@@ -14,6 +14,10 @@ const useFriendStore = create((set) => ({
   // Store messages
   messages: [],
   setMessages: (messages) => set({ messages }),
+  // Store new message detection
+  recentMessages: false,
+  setRecentMessages: () =>
+    set((state) => ({ recentMessages: !state.recentMessages })),
   // Used to triggger re-renders
   render: false,
   setRender: () => set((state) => ({ render: !state.render })),
