@@ -1,8 +1,15 @@
 import Friend from "./Friend";
 import useGetFriends from "../../hooks/useGetFriends";
+import useGetSocketDetectMessages from "../../hooks/useGetSocketDetectMessages";
+import friendStore from "../../store/friendStore";
 
 const FriendList = () => {
   const { loading, friends } = useGetFriends();
+  // recentMessages is returned from useGetSocketDetectMessages
+  const { recentMessages } = friendStore();
+
+  //testing
+  useGetSocketDetectMessages();
 
   if (loading) {
     return <div className="loading loading-spinner">Loading...</div>;

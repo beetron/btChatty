@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import useLogout from "./useLogout";
+import friendStore from "../store/friendStore";
 
 const useGetFriends = () => {
   const [loading, setLoading] = useState(false);
   const [friends, setFriends] = useState([]);
+  const { recentMessages } = friendStore();
   const { logout } = useLogout();
 
   useEffect(() => {
     const getFriends = async () => {
       setLoading(true);
-
       try {
         const res = await fetch("/api/users/friendlist", {
           method: "GET",
@@ -34,7 +35,7 @@ const useGetFriends = () => {
       }
     };
     getFriends();
-  }, []);
+  }, [recentMessages]);
   return { loading, friends };
 };
 
