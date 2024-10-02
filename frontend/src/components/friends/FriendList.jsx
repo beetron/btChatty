@@ -8,7 +8,8 @@ const FriendList = () => {
   // recentMessages is returned from useGetSocketDetectMessages
   const { recentMessages } = friendStore();
 
-  //testing
+  // Any new messages will setRecentMessages,
+  // and useGetFriends will re-run to update FriendList ordering
   useGetSocketDetectMessages();
 
   if (loading) {

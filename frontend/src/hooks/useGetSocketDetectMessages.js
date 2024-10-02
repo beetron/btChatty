@@ -11,7 +11,7 @@ const useGetSocketDetectMessages = () => {
       setRecentMessages();
     });
     return () => socket?.off("newMessage");
-  }, [socket, setRecentMessages]);
+  }, [socket]);
 };
 
 export default useGetSocketDetectMessages;
