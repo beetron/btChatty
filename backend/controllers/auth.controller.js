@@ -7,13 +7,16 @@ export const signup = async (req, res) => {
   try {
     const { username, password, confirmPassword, uniqueId } = req.body;
 
+    // Convert username to lowercase
+    const usernameLowerCase = username.toLowerCase();
+
     // Check if chosen passwords match
     if (password != confirmPassword) {
       return res.status(400).json({ error: "Password mismatch" });
     }
 
     // Check if username is taken
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username: usernameLowerCase });
 
     if (user) {
       return res.status(400).json({ error: "Username is taken" });
@@ -38,7 +41,7 @@ export const signup = async (req, res) => {
 
     // Friend that shared uniqueId is added to friendList
     const newUser = new User({
-      username: username,
+      username: usernameLowerCase,
       password: hashedPassword,
       profilePhoto: maleProfilePic,
       friendList: [friend._id],
@@ -72,8 +75,11 @@ export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    // Convert username to lowercase
+    const usernameLowerCase = username.toLowerCase();
+
     // Search for username
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username: usernameLowerCase });
 
     // Check passwored integrity
     const isPasswordCorrect = await bcrypt.compare(
