@@ -1,4 +1,3 @@
-import React from "react";
 import FriendsContainer from "../../components/friends/FriendsContainer";
 
 const Home = () => {
