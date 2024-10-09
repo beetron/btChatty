@@ -2,6 +2,9 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext";
+import { useEffect } from "react";
+import OneSignal from "react-onesignal";
+
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
@@ -10,7 +13,17 @@ import Settings from "./pages/settings/Settings";
 import FriendSettings from "./pages/friend-settings/FriendSettings";
 
 function App() {
+  // OneSignal initialization for notifications
+  useEffect(() => {
+    (async () => {
+      OneSignal.init({
+        appId: "53d4d4bb-37f8-4b6c-950e-9f58cd5a8c63",
+      });
+    })();
+  }, []);
+
   const { authUser } = useAuthContext();
+
   return (
     <div className="min-h-screen w-full flex items-start justify-center">
       <Routes>
