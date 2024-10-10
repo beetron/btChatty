@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     (async () => {
       OneSignal.init({
-        appId: process.env.ONESIGNAL_APP_ID,
+        appId: import.meta.env.VITE_ONESIGNAL_APP_ID,
       });
     })();
   }, []);
