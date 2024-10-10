@@ -4,11 +4,11 @@ import friendStore from "../store/friendStore";
 
 const useGetSocketDetectMessages = () => {
   const { socket } = useSocketContext();
-  const { setRecentMessages } = friendStore();
+  const { recentMessages, setRecentMessages } = friendStore();
 
   useEffect(() => {
     socket?.on("newMessage", (newMessage) => {
-      setRecentMessages();
+      setRecentMessages(!recentMessages);
     });
     return () => socket?.off("newMessage");
   }, [socket]);
