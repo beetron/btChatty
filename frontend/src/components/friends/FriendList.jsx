@@ -5,6 +5,7 @@ import friendStore from "../../store/friendStore";
 
 const FriendList = () => {
   const { loading, friends } = useGetFriends();
+
   // recentMessages is returned from useGetSocketDetectMessages
   const { recentMessages } = friendStore();
 
@@ -16,6 +17,7 @@ const FriendList = () => {
     return <div className="loading loading-spinner">Loading...</div>;
   }
 
+  // Sort friends by most recent message
   const sortedFriends = friends.sort(
     (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
   );
