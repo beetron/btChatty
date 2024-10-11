@@ -34,10 +34,7 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Avatar placeholder
-
-    const maleProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-    // const femaleProfilePic =
-    //   "https://avatar.iran.liara.run/public/girl?username=${username}";
+    const maleProfilePic = "/placeholder_profile_pic.png";
 
     // Friend that shared uniqueId is added to friendList
     const newUser = new User({
