@@ -39,6 +39,22 @@ export const sendMessage = async (req, res) => {
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
+    // else if (receiverSocketId === null) {
+    //   // Send push via OneSignal if user's not online
+    //   const res = await fetch("https://onesignal.com/api/v1/notifications", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json; charset=utf-8",
+    //       Authorization: "Basic " + process.env.ONESIGNAL_REST_API_KEY,
+    //     },
+    //     body: JSON.stringify({
+    //       app_id: process.env.ONESIGNAL_APP_ID,
+    //       contents: { en: `New message from ${req.user.username}` },
+    //       include_player_ids: [receiverId],
+    //     }),
+    //   });
+    // }
+
     res.status(201).json(newMessage);
   } catch (error) {
     console.log("Error in sendMessage controller: ", error.message);
