@@ -19,7 +19,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center mx-auto">
       <div className="w-full p-6 rounded-lg ">
         <h1 className="mb-4 text-4xl font-semibold text-center">
-          <span className="text-blue-300">btChatty </span>
+          <span className="text-blue-300">btC </span>
         </h1>
         <form onSubmit={submitForm}>
           <div className="mt-1">

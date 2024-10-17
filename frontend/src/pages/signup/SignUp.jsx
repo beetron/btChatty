@@ -22,7 +22,7 @@ const SignUp = () => {
     <div className="min-h-screen flex items-center justify-center mx-auto">
       <div className="w-full p-6 rounded-lg ">
         <h1 className="text-3xl font-semibold text-center text-gray-300">
-          Sign up - <span className="text-blue-300">btChatty</span>
+          Sign up - <span className="text-blue-300">btC</span>
         </h1>
         <form onSubmit={submitForm}>
           <div>
