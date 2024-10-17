@@ -42,7 +42,7 @@ export const sendMessage = async (req, res) => {
 
     // Send push via OneSignal if user's not online
     if (!receiverSocketId) {
-      console.log("Sending push notification");
+      console.log("Sending push to: " + receiverId);
 
       const pushRes = await fetch(
         "https://api.onesignal.com/notifications?c=push",
