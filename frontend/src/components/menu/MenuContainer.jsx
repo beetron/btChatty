@@ -3,6 +3,7 @@ import SettingsButton from "./SettingsButton";
 import LogoutButton from "./LogoutButton";
 import FriendSettingsButton from "./FriendSettingsButton";
 import ReloadButton from "./ReloadButton";
+import ReSubscribeButton from "./ReSubscribeButton";
 
 const MenuContainer = ({ isHomeScreen }) => {
   return (
@@ -11,9 +12,10 @@ const MenuContainer = ({ isHomeScreen }) => {
         {!isHomeScreen && <HomeButton />}
       </div>
       <div className="flex justify-end w-full gap-6 mr-2">
+        {isHomeScreen && <ReSubscribeButton />}
         {isHomeScreen && <ReloadButton />}
-        {isHomeScreen && <FriendSettingsButton />}
-        {isHomeScreen && <SettingsButton />}
+        <FriendSettingsButton />
+        <SettingsButton />
         <LogoutButton />
       </div>
     </div>
