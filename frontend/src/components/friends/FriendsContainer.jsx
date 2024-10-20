@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import SearchInput from "./SearchInput";
+import UpdateInfo from "./UpdateInfo";
 import FriendList from "./FriendList";
 import MenuContainer from "../menu/MenuContainer";
 import friendStore from "../../store/friendStore";
@@ -17,7 +17,7 @@ const FriendsContainer = () => {
         <MenuContainer isHomeScreen={true} />
       </div>
       <div className="divider px-3" />
-      <SearchInput />
+      <UpdateInfo />
       <div className="divider px-3" />
       <FriendList />
     </div>
