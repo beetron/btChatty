@@ -1,4 +1,4 @@
-import FriendsContainer from "../../components/friends/FriendsContainer";
+import FriendsContainer from "../../components/home/FriendsContainer";
 import runOneSignal from "../../services/runOneSignal";
 import { useEffect } from "react";
 
