@@ -1,6 +1,7 @@
 import MenuContainer from "../menu/MenuContainer";
 import UpdateUniqueId from "./UpdateUniqueId";
 import UpdateNickname from "./UpdateNickname";
+import ReSubscribe from "./ReSubscribe";
 
 const SettingsContainer = () => {
   return (
@@ -13,6 +14,8 @@ const SettingsContainer = () => {
           <UpdateNickname />
           <div className="divider px-3" />
           <UpdateUniqueId />
+          <div className="divider px-3" />
+          <ReSubscribe />
         </div>
       </>
     </div>
