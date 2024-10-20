@@ -1,12 +1,13 @@
-import runOneSignal from "../services/runOneSignal";
-
 const useReSubscribe = () => {
   const reSubscribe = () => {
     // Remove OneSignal notification promp status to request
     localStorage.removeItem("onesignal-notification-prompt");
 
-    // Re-initialize OneSignal
-    runOneSignal();
+    // Remove OneSignal initialization status to reinitialize
+    localStorage.removeItem("btchatty-OneSignal-initialized");
+
+    // Reload page to trigger OneSignal prompt
+    window.location.reload();
   };
   return reSubscribe;
 };

@@ -4,13 +4,6 @@ import { useEffect } from "react";
 
 const Home = () => {
   useEffect(() => {
-    // Clear badge count when user opens the app while logged in
-    // if (navigator.clearAppBadge) {
-    //   navigator.clearAppBadge().catch((error) => {
-    //     console.error("Failed to clear app badge:", error);
-    //   });
-    // }
-    // Run OneSignal for notifications
     runOneSignal();
   }, []);
   return (
