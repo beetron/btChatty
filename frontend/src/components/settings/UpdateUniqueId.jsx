@@ -29,7 +29,7 @@ const UpdateUniqueId = () => {
 
   return (
     <div className="flex flex-col justify-center items-start">
-      <p className="dark:text-white text-2xl m-3">Change Unique ID</p>
+      <p className="dark:text-white text-2xl m-3">Unique ID</p>
       <div className="flex justify-start w-full">
         <input
           type="text"

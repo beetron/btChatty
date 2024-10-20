@@ -18,7 +18,7 @@ const UpdateNickname = () => {
 
   return (
     <div className="flex flex-col justify-center items-start">
-      <p className="dark:text-white text-2xl m-3">Change Display Name</p>
+      <p className="dark:text-white text-2xl m-3">Display Name</p>
       <div className="flex justify-start w-full">
         <input
           type="text"
