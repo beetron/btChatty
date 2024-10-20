@@ -12,4 +12,6 @@ export default async function runOneSignal() {
 
   // Register or login with external_id (_id used)
   OneSignal.login(authUser._id);
+
+  console.log("OneSignal initialized");
 }
