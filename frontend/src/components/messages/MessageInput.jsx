@@ -14,16 +14,33 @@ const MessageInput = () => {
     setMessage("");
   };
 
+  const handleKeyDown = (e) => {
+    // Check if client is on mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (e.key === "Enter") {
+      // Enter will insert new line on mobile, enter will send message on desktop
+      if (isMobile || e.shiftKey) {
+        e.preventDefault();
+        setMessage((prevMessage) => prevMessage + "\n");
+      } else {
+        // Submit the form on desktop when Enter is pressed without Shift
+        e.preventDefault();
+        submitMessage(e);
+      }
+    }
+  };
+
   return (
     <form className="px-4 my-3" onSubmit={submitMessage}>
       <div className="w-full relative">
-        <input
+        <textarea
           type="text"
           className="border text-sm rounded-lg block w-full p-2.5 
               bg-gray-700 border-gray-600 text-white"
           placeholder="Start typing"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <button
           type="submit"
