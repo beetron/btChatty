@@ -16,8 +16,16 @@ const useGetMessages = () => {
         if (data.error) {
           throw new Error(data.error);
         }
-        // Update messages store
-        setMessages(data);
+        // Replace actual line breaks with <br /> if message.text exists
+        const formattedData = data.map((messages) => ({
+          ...messages,
+          message: messages.message
+            ? messages.message.replace(/\n/g, "<br />")
+            : messages.message,
+        }));
+
+        // Update and set messages
+        setMessages(formattedData);
       } catch (error) {
         console.error(error.message);
       } finally {

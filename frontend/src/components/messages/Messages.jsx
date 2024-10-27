@@ -5,7 +5,7 @@ import useGetSocketMessages from "../../hooks/useGetSocketMessages";
 import friendStore from "../../store/friendStore";
 
 const Messages = () => {
-  // render dependency used for useGetMessages() hook
+  // Render dependency used for useGetMessages() hook
   const { render } = friendStore();
   const { loading, messages } = useGetMessages();
   const lastMessageRef = useRef();
