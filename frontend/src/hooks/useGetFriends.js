@@ -8,6 +8,21 @@ const useGetFriends = () => {
   const [friends, setFriends] = useState([]);
   const { recentMessages } = friendStore();
   const { logout } = useLogout();
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        setIsVisible(true);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -34,8 +49,13 @@ const useGetFriends = () => {
         setLoading(false);
       }
     };
-    getFriends();
-  }, [recentMessages]);
+
+    if (isVisible) {
+      getFriends();
+      setIsVisible(false);
+    }
+  }, [recentMessages, isVisible, logout]);
+
   return { loading, friends };
 };
 

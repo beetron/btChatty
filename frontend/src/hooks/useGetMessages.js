@@ -4,6 +4,21 @@ import friendStore from "../store/friendStore";
 const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
   const { messages, setMessages, selectedFriend, render } = friendStore();
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        setIsVisible(true);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -32,8 +47,12 @@ const useGetMessages = () => {
         setLoading(false);
       }
     };
-    getMessages();
-  }, [setMessages, render]);
+
+    if (isVisible) {
+      getMessages();
+      setIsVisible(false);
+    }
+  }, [setMessages, render, isVisible, selectedFriend._id]);
 
   return { loading, messages };
 };
