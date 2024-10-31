@@ -62,8 +62,8 @@ export const sendMessage = async (req, res) => {
           }),
         }
       );
-      const pushReshParsed = await pushRes.json();
-      console.log("Push notification response: ", pushReshParsed);
+      const pushResParsed = await pushRes.json();
+      console.log("Push notification response: ", pushResParsed);
     }
 
     res.status(201).json(newMessage);
