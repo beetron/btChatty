@@ -18,12 +18,16 @@ const MessageInput = () => {
     // Check if client is on mobile device
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (e.key === "Enter") {
-      // Enter will insert new line on mobile, enter will send message on desktop
-      if (isMobile || e.shiftKey) {
+      if (isMobile) {
+        // On mobile, insert a new line
+        e.preventDefault();
+        setMessage((prevMessage) => prevMessage + "\n");
+      } else if (!isMobile && e.shiftKey) {
+        // On desktop, Shift+Enter inserts a new line
         e.preventDefault();
         setMessage((prevMessage) => prevMessage + "\n");
       } else {
-        // Submit the form on desktop when Enter is pressed without Shift
+        // On desktop, Enter submits the message
         e.preventDefault();
         submitMessage(e);
       }

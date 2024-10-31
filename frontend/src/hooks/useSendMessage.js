@@ -25,8 +25,17 @@ const useSendMessage = () => {
         throw new Error(data.error);
       }
 
+      // Replace actual line breaks with <br /> if message.text exists
+      const formattedData = {
+        ...data,
+        message:
+          typeof data.message === "string"
+            ? data.message.replace(/\n/g, "<br />")
+            : data.message,
+      };
+
       // Update messages store
-      setMessages([...messages, data]);
+      setMessages([...messages, formattedData]);
     } catch (error) {
       toast.error(error.message);
     } finally {

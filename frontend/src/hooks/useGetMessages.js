@@ -4,13 +4,13 @@ import friendStore from "../store/friendStore";
 const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
   const { messages, setMessages, selectedFriend, render } = friendStore();
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(
+    document.visibilityState === "visible"
+  );
 
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        setIsVisible(true);
-      }
+      setIsVisible(document.visibilityState === "visible");
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -32,11 +32,11 @@ const useGetMessages = () => {
           throw new Error(data.error);
         }
         // Replace actual line breaks with <br /> if message.text exists
-        const formattedData = data.map((messages) => ({
-          ...messages,
-          message: messages.message
-            ? messages.message.replace(/\n/g, "<br />")
-            : messages.message,
+        const formattedData = data.map((message) => ({
+          ...message,
+          message: message.message
+            ? message.message.replace(/\n/g, "<br />")
+            : message.message,
         }));
 
         // Update and set messages
@@ -50,7 +50,6 @@ const useGetMessages = () => {
 
     if (isVisible) {
       getMessages();
-      setIsVisible(false);
     }
   }, [setMessages, render, isVisible, selectedFriend._id]);
 
