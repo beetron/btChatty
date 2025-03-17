@@ -1,4 +1,4 @@
-<b>PROJECT IS MOVING TO MOBILE ONLY React Native soon...</b>
+<b>Discontinued...</b>
 
 This MERN stack web application is based off of https://github.com/burakorkmez/mern-chat-app
 
